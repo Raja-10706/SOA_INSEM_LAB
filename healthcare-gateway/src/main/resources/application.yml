@@ -1,0 +1,19 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: healthcare-gateway
+  cloud:
+    gateway:
+      server:
+        webflux:
+          routes:
+            - id: patient-service-route
+              uri: http://localhost:8081
+              predicates:
+                - Path=/patients,/patients/**
+            - id: doctor-service-route
+              uri: http://localhost:8082
+              predicates:
+                - Path=/doctors,/doctors/**
